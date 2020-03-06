@@ -8,66 +8,58 @@ using System.Threading.Tasks;
 
 namespace senai.Peoples.WebApi.Repositories
 {
+    /// <summary>
+    /// Repositório dos Tipos de Usuários
+    /// </summary>
     public class TipoUsuarioRepository : ITipoUsuarioRepository
     {
-        private string stringConexao = "Data Source=DESKTOP-GCOFA7F\\SQLEXPRESS; initial catalog=Peoples; user Id=sa; pwd=sa@132";
+        /// <summary>
+        /// String de conexão com o banco de dados que recebe os parâmetros
+        /// </summary>
+        private string stringConexao = "Data Source=DESKTOP-NJ6LHN1\\SQLDEVELOPER; initial catalog=Peoples; integrated security=true;";
+        //private string stringConexao = "Data Source=DESKTOP-GCOFA7F\\SQLEXPRESS; initial catalog=Peoples; user Id=sa; pwd=sa@132";
 
-        public List<TipoUsuarioDomain> ListarTiposUsuarios()
+        /// <summary>
+        /// Atualiza um tipo de usuário existente
+        /// </summary>
+        /// <param name="id">ID do tipo de usuário que será atualziado</param>
+        /// <param name="TipoUsuarioAtualizado">Objeto TipoUsuarioAtualizado que será alterado</param>
+        public void Atualizar(int id, TipoUsuarioDomain TipoUsuarioAtualizado)
         {
-            // Cria uma lista funcionarios onde serão armazenados os dados
-            List<TipoUsuarioDomain> tipoUsuarios = new List<TipoUsuarioDomain>();
-
-            // Declara a SqlConnection passando a string de conexão
+            // Declara a conexão passando a string de conexão
             using (SqlConnection con = new SqlConnection(stringConexao))
             {
-                // Declara a instrução a ser executada
-                string querySelectAll = "SELECT IdTipoUsuario, NomeTipoUsuario FROM TipoUsuario";
-
-                // Abre a conexão com o banco de dados
-                con.Open();
-
-                // Declara o SqlDataReader para receber os dados do banco de dados
-                SqlDataReader rdr;
+                // Declara a query que será executada
+                string queryUpdate = "UPDATE TiposUsuario SET Titulo = @Titulo WHERE IdTipoUsuario = @ID";
 
                 // Declara o SqlCommand passando o comando a ser executado e a conexão
-                using (SqlCommand cmd = new SqlCommand(querySelectAll, con))
+                using (SqlCommand cmd = new SqlCommand(queryUpdate, con))
                 {
-                    // Executa a query e armazena os dados no rdr
-                    rdr = cmd.ExecuteReader();
+                    // Passa os valores dos parâmetros
+                    cmd.Parameters.AddWithValue("@ID", id);
+                    cmd.Parameters.AddWithValue("@Titulo", TipoUsuarioAtualizado.Titulo);
 
-                    // Enquanto houver registros para serem lidos no rdr, o laço se repete
-                    while (rdr.Read())
-                    {
-                        // Instancia um objeto funcionario 
-                        TipoUsuarioDomain tipoUsuario = new TipoUsuarioDomain
-                        {
-                            // Atribui à propriedade IdFuncionario o valor da coluna "IdFuncionario" da tabela do banco
-                            IdTipoUsuario = Convert.ToInt32(rdr["IdTipoUsuario"])
+                    // Abre a conexão com o banco de dados
+                    con.Open();
 
-                            // Atribui à propriedade Nome o valor da coluna "Nome" da tabela do banco
-                            ,
-                            NomeTipoUsuario = rdr["NomeTipoUsuario"].ToString()
-                        };
-
-                        // Adiciona o funcionario criado à lista funcionarios
-                        tipoUsuarios.Add(tipoUsuario);
-                    }
+                    // Executa o comando
+                    cmd.ExecuteNonQuery();
                 }
             }
-
-            // Retorna a lista de funcionarios
-            return tipoUsuarios;
         }
 
-
+        /// <summary>
+        /// Busca um tipo de usuário através do ID
+        /// </summary>
+        /// <param name="id">ID do tipo de usuário que será buscado</param>
+        /// <returns>Retorna um tipo de usuário buscado</returns>
         public TipoUsuarioDomain BuscarPorId(int id)
         {
             // Declara a conexão passando a string de conexão
             using (SqlConnection con = new SqlConnection(stringConexao))
             {
                 // Declara a query que será executada
-                string querySelectById = "SELECT IdTipoUsuario, NomeTipoUsuario FROM TipoUsuario" +
-                                        " WHERE IdTipoUsuario = @ID";
+                string querySelectById = "SELECT IdTipoUsuario, Titulo FROM TiposUsuario WHERE IdTipoUsuario = @ID";
 
                 // Abre a conexão com o banco de dados
                 con.Open();
@@ -87,18 +79,15 @@ namespace senai.Peoples.WebApi.Repositories
                     // Caso o resultado da query possua registro
                     if (rdr.Read())
                     {
-                        // Instancia um objeto funcionario 
+                        // Instancia um objeto tipoUsuario 
                         TipoUsuarioDomain tipoUsuario = new TipoUsuarioDomain
                         {
-                            // Atribui à propriedade IdFuncionario o valor da coluna "IdFuncionario" da tabela do banco
-                            IdTipoUsuario = Convert.ToInt32(rdr["IdTipoUsuario"])
-
-                            // Atribui à propriedade Nome o valor da coluna "Nome" da tabela do banco
-                            ,
-                            NomeTipoUsuario = rdr["NomeTipoUsuario"].ToString()
+                            // Atribui às propriedades os valores das colunas da tabela do banco
+                            IdTipoUsuario = Convert.ToInt32(rdr["IdTipoUsuario"])                            
+                            ,Titulo = rdr["Titulo"].ToString()
                         };
 
-                        // Retorna o funcionário buscado
+                        // Retorna o tipoUsuario buscado
                         return tipoUsuario;
                     }
 
@@ -108,23 +97,23 @@ namespace senai.Peoples.WebApi.Repositories
             }
         }
 
-
-        public void AtualizarTipoUsuario(int id, TipoUsuarioDomain tipoUsuarioAtualizado)
+        /// <summary>
+        /// Cadastra um novo tipo de usuário
+        /// </summary>
+        /// <param name="novoTipoUsuario">Objeto novoTipoUsuario que será cadastrado</param>
+        public void Cadastrar(TipoUsuarioDomain novoTipoUsuario)
         {
-            // Declara a conexão passando a string de conexão
+            // Declara a SqlConnection passando a string de conexão
             using (SqlConnection con = new SqlConnection(stringConexao))
             {
                 // Declara a query que será executada
-                string queryUpdate = "UPDATE TipoUsuario " +
-                                     "SET NomeTipoUsuario = @NomeTipoUsuario " +
-                                     "WHERE IdTipoUsuario = @ID";
+                string queryInsert = "INSERT INTO TiposUsuario(Titulo) VALUES (@Titulo)";
 
-                // Declara o SqlCommand passando o comando a ser executado e a conexão
-                using (SqlCommand cmd = new SqlCommand(queryUpdate, con))
+                // Declara o comando passando a query e a conexão
+                using (SqlCommand cmd = new SqlCommand(queryInsert, con))
                 {
-                    // Passa os valores dos parâmetros
-                    cmd.Parameters.AddWithValue("@ID", id);
-                    cmd.Parameters.AddWithValue("@NomeTipoUsuario", tipoUsuarioAtualizado.NomeTipoUsuario);
+                    // Passa o valor do parâmetro
+                    cmd.Parameters.AddWithValue("@Titulo", novoTipoUsuario.Titulo);
 
                     // Abre a conexão com o banco de dados
                     con.Open();
@@ -135,14 +124,17 @@ namespace senai.Peoples.WebApi.Repositories
             }
         }
 
-
-        public void DeletarTipoUsuario(int id)
+        /// <summary>
+        /// Deleta um tipo de usuário
+        /// </summary>
+        /// <param name="id">ID do tipo de usuário que será deletado</param>
+        public void Deletar(int id)
         {
             // Declara a conexão passando a string de conexão
             using (SqlConnection con = new SqlConnection(stringConexao))
             {
                 // Declara a query que será executada passando o valor como parâmetro
-                string queryDelete = "DELETE FROM TipoUsuario WHERE IdTipoUsuario = @ID";
+                string queryDelete = "DELETE FROM TiposUsuario WHERE IdTipoUsuario = @ID";
 
                 // Declara o comando passando a query e a conexão
                 using (SqlCommand cmd = new SqlCommand(queryDelete, con))
@@ -157,6 +149,54 @@ namespace senai.Peoples.WebApi.Repositories
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+
+        /// <summary>
+        /// Lista todos os tipos de usuário
+        /// </summary>
+        /// <returns>Retorna uma lista de tipos de usuário</returns>
+        public List<TipoUsuarioDomain> Listar()
+        {
+            // Cria uma lista tipos de usuário onde serão armazenados os dados
+            List<TipoUsuarioDomain> tiposUsuario = new List<TipoUsuarioDomain>();
+
+            // Declara a SqlConnection passando a string de conexão
+            using (SqlConnection con = new SqlConnection(stringConexao))
+            {
+                // Declara a instrução a ser executada
+                string querySelectAll = "SELECT IdTipoUsuario, Titulo FROM TiposUsuario";
+
+                // Abre a conexão com o banco de dados
+                con.Open();
+
+                // Declara o SqlDataReader para receber os dados do banco de dados
+                SqlDataReader rdr;
+
+                // Declara o SqlCommand passando o comando a ser executado e a conexão
+                using (SqlCommand cmd = new SqlCommand(querySelectAll, con))
+                {
+                    // Executa a query e armazena os dados no rdr
+                    rdr = cmd.ExecuteReader();
+
+                    // Enquanto houver registros para serem lidos no rdr, o laço se repete
+                    while (rdr.Read())
+                    {
+                        // Instancia um objeto tipoUsuario 
+                        TipoUsuarioDomain tipoUsuario = new TipoUsuarioDomain
+                        {
+                            // Atribui às propriedades os valores das colunas da tabela do banco
+                            IdTipoUsuario = Convert.ToInt32(rdr["IdTipoUsuario"])                            
+                            ,Titulo = rdr["Titulo"].ToString()
+                        };
+
+                        // Adiciona o tipoUsuario criado à lista tiposUsuario
+                        tiposUsuario.Add(tipoUsuario);
+                    }
+                }
+            }
+
+            // Retorna a lista de tipos de usuário
+            return tiposUsuario;
         }
     }
 }

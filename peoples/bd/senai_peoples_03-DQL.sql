@@ -19,7 +19,16 @@ SELECT IdFuncionario, CONCAT (Nome,' ',Sobrenome) AS [Nome Completo], DataNascim
 -- Exibe todos os funcionários de forma ordenada
 SELECT IdFuncionario, Nome, Sobrenome, DataNascimento FROM Funcionarios ORDER BY Nome DESC;
 
-SELECT IdTipoUsuario, NomeTipoUsuario FROM TipoUsuario
+-- Exibe todos os tipos de usuário
+SELECT IdTipoUsuario, Titulo FROM TiposUsuario
 
-SELECT EmailUsuario, TipoUsuario.NomeTipoUsuario FROM Usuario
-INNER JOIN TipoUsuario ON TipoUsuario.IdTipoUsuario =  Usuario.IdTipoUsuario;
+-- Exibe todos os usuários
+SELECT U.IdUsuario, U.Email, U.IdTipoUsuario, TU.Titulo FROM Usuarios U
+INNER JOIN TiposUsuario TU
+ON U.IdTipoUsuario = TU.IdTipoUsuario
+
+-- Busca um usuário através do E-mail e da Senha
+SELECT U.IdUsuario, U.Email, U.IdTipoUsuario, TU.Titulo FROM Usuarios U
+INNER JOIN TiposUsuario TU
+ON U.IdTipoUsuario = TU.IdTipoUsuario
+WHERE U.Email = 'admin@email.com' AND U.Senha = 'admin123'

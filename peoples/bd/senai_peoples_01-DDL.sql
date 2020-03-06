@@ -17,14 +17,17 @@ GO
 ALTER TABLE Funcionarios
 ADD DataNascimento DATE
 
-CREATE TABLE TipoUsuario(
-	IdTipoUsuario INT IDENTITY PRIMARY KEY,
-	NomeTipoUsuario VARCHAR (255) NOT NULL
+-- Cria a tabela TiposUsuario
+CREATE TABLE TiposUsuario(
+	IdTipoUsuario	INT PRIMARY KEY IDENTITY
+	,Titulo			VARCHAR(255) UNIQUE NOT NULL
 );
 
-CREATE TABLE Usuario (
-	IdUsuario INT IDENTITY PRIMARY KEY,
-	EmailUsuario VARCHAR (255) NOT NULL UNIQUE,
-	Senha VARCHAR (255) NOT NULL,
-	IdTipoUsuario INT FOREIGN KEY REFERENCES TipoUsuario (IdTipoUsuario)
+-- Cria a tabela Usuarios
+CREATE TABLE Usuarios(
+	IdUsuario		INT PRIMARY KEY IDENTITY
+	,Email			VARCHAR(255) UNIQUE NOT NULL
+	,Senha			VARCHAR(255) NOT NULL
+	,IdTipoUsuario	INT FOREIGN KEY REFERENCES TiposUsuario(IdTipoUsuario)
 );
+GO

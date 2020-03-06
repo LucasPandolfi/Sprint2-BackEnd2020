@@ -1,0 +1,14 @@
+C:\Users\50345891848\Desktop\Sprint2-BackEnd2020\Senai.WebApi.DbFirst\Senai.WebApi.DbFirst\bin\Debug\netcoreapp2.1\Senai.WebApi.DbFirst.deps.json
+C:\Users\50345891848\Desktop\Sprint2-BackEnd2020\Senai.WebApi.DbFirst\Senai.WebApi.DbFirst\bin\Debug\netcoreapp2.1\Senai.WebApi.DbFirst.runtimeconfig.json
+C:\Users\50345891848\Desktop\Sprint2-BackEnd2020\Senai.WebApi.DbFirst\Senai.WebApi.DbFirst\bin\Debug\netcoreapp2.1\Senai.WebApi.DbFirst.runtimeconfig.dev.json
+C:\Users\50345891848\Desktop\Sprint2-BackEnd2020\Senai.WebApi.DbFirst\Senai.WebApi.DbFirst\bin\Debug\netcoreapp2.1\Senai.WebApi.DbFirst.dll
+C:\Users\50345891848\Desktop\Sprint2-BackEnd2020\Senai.WebApi.DbFirst\Senai.WebApi.DbFirst\obj\Debug\netcoreapp2.1\Senai.WebApi.DbFirst.csprojAssemblyReference.cache
+C:\Users\50345891848\Desktop\Sprint2-BackEnd2020\Senai.WebApi.DbFirst\Senai.WebApi.DbFirst\obj\Debug\netcoreapp2.1\Senai.WebApi.DbFirst.csproj.CoreCompileInputs.cache
+C:\Users\50345891848\Desktop\Sprint2-BackEnd2020\Senai.WebApi.DbFirst\Senai.WebApi.DbFirst\obj\Debug\netcoreapp2.1\Senai.WebApi.DbFirst.RazorAssemblyInfo.cache
+C:\Users\50345891848\Desktop\Sprint2-BackEnd2020\Senai.WebApi.DbFirst\Senai.WebApi.DbFirst\obj\Debug\netcoreapp2.1\Senai.WebApi.DbFirst.RazorAssemblyInfo.cs
+C:\Users\50345891848\Desktop\Sprint2-BackEnd2020\Senai.WebApi.DbFirst\Senai.WebApi.DbFirst\obj\Debug\netcoreapp2.1\Senai.WebApi.DbFirst.AssemblyInfoInputs.cache
+C:\Users\50345891848\Desktop\Sprint2-BackEnd2020\Senai.WebApi.DbFirst\Senai.WebApi.DbFirst\obj\Debug\netcoreapp2.1\Senai.WebApi.DbFirst.AssemblyInfo.cs
+C:\Users\50345891848\Desktop\Sprint2-BackEnd2020\Senai.WebApi.DbFirst\Senai.WebApi.DbFirst\obj\Debug\netcoreapp2.1\Senai.WebApi.DbFirst.RazorTargetAssemblyInfo.cache
+C:\Users\50345891848\Desktop\Sprint2-BackEnd2020\Senai.WebApi.DbFirst\Senai.WebApi.DbFirst\bin\Debug\netcoreapp2.1\Senai.WebApi.DbFirst.pdb
+C:\Users\50345891848\Desktop\Sprint2-BackEnd2020\Senai.WebApi.DbFirst\Senai.WebApi.DbFirst\obj\Debug\netcoreapp2.1\Senai.WebApi.DbFirst.dll
+C:\Users\50345891848\Desktop\Sprint2-BackEnd2020\Senai.WebApi.DbFirst\Senai.WebApi.DbFirst\obj\Debug\netcoreapp2.1\Senai.WebApi.DbFirst.pdb
